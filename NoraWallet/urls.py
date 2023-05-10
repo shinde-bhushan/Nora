@@ -31,10 +31,11 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    # Django Admin Panel Path
+    path('admin/', admin.site.urls),
+    # User account Path
+    path('api/authenticate/', include('account.urls')),
     # Swagger Documentation Path
     path('doc/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
-    # Django Admin Panel Path
-    path('admin/', admin.site.urls),
 ]
