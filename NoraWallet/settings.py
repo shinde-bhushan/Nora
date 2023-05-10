@@ -24,6 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
+USER_POOL_ID = os.getenv('USER_POOL_ID')
+USER_POOL_ARN = os.getenv('USER_POOL_ARN')
+USER_POOL_NAME = os.getenv('USER_POOL_NAME')
+AWS_COGNITO_APP_CLIENT_ID = os.getenv('APP_CLIENT_ID')
+AWS_ACCESS_ID = os.getenv('AWS_ACCESS_ID')
+AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
+AWS_COGNITO_REGION = os.getenv('AWS_COGNITO_REGION')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'rest_framework',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +61,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler'
+}
 
 ROOT_URLCONF = 'NoraWallet.urls'
 
@@ -104,7 +116,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
