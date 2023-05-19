@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nora-django:0.0.1
+    depends_on:
+      - postgres
+    ports:
+      - 8000:8000
+    # Add other configuration for your Django service
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'eUDnTi5NYCSclF0YgXUR'
+      POSTGRES_DB: 'postgres'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    # Add other configuration for your PostgreSQL service
+
+volumes:
+  postgres_data:
